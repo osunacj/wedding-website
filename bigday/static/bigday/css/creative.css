@@ -90,6 +90,18 @@ aside {
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
     transition: all .35s;
+    min-height: 85px;
+}
+
+.navbar-default .navbar-nav > li > a {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.navbar-default .navbar-brand {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 85px;
 }
 
 .navbar-default .navbar-header .navbar-brand {
@@ -193,7 +205,7 @@ header {
 }
 
 #main-header {
-    background-image: url('../images/wedding-selfie-better.jpg');
+    background-image: url('../images/posing_at_bridge.jpeg');
 }
 
 header .header-content {
