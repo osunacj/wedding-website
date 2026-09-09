@@ -96,12 +96,27 @@ aside {
 .navbar-default .navbar-nav > li > a {
     padding-top: 30px;
     padding-bottom: 30px;
+    font-size: 15px;
+    letter-spacing: .8px;
 }
 
 .navbar-default .navbar-brand {
     padding-top: 10px;
     padding-bottom: 10px;
     height: 85px;
+}
+
+.navbar-default .navbar-brand .navbar-monogram {
+    height: 100%;
+    max-height: 58px;
+    width: auto;
+    vertical-align: middle;
+}
+
+/* Desktop shows a centered monogram flanked by two link groups (see the
+   >=768px block below); this copy stays hidden until that layout swaps in. */
+.navbar-default .brand-desktop {
+    display: none;
 }
 
 .navbar-default .navbar-header .navbar-brand {
@@ -119,7 +134,6 @@ aside {
 .navbar-default .nav > li>a,
 .navbar-default .nav>li>a:focus {
     text-transform: uppercase;
-    font-size: 13px;
     font-weight: 700;
     color: rgb(28,56,81);
 }
@@ -144,6 +158,7 @@ aside {
     .navbar-default {
         border-color: rgba(28,56,81,.3);
         background-color: transparent;
+        min-height: 112px;
     }
 
     .navbar-default .navbar-header .navbar-brand {
@@ -188,6 +203,51 @@ aside {
     .navbar-default.affix .nav > li>a:hover,
     .navbar-default.affix .nav>li>a:focus:hover {
         color: #f05f40;
+    }
+
+    /* Centered monogram flanked by two link clusters. #mainNav-scoped
+       selectors out-specificity Bootstrap's .navbar-header/.navbar-collapse
+       display rules without needing !important everywhere. */
+    #mainNav .navbar-header {
+        display: none;
+    }
+
+    #mainNav .navbar-collapse {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        height: 112px;
+    }
+
+    .navbar-default .brand-desktop {
+        display: flex;
+        align-items: center;
+        flex: 0 0 auto;
+        margin: 0 40px;
+    }
+
+    .navbar-default .brand-desktop .navbar-monogram {
+        max-height: 72px;
+    }
+
+    .navbar-default .nav-cluster {
+        flex: 1;
+        display: flex;
+        margin: 0;
+    }
+
+    .navbar-default .nav-cluster-left {
+        justify-content: flex-end;
+    }
+
+    .navbar-default .nav-cluster-right {
+        justify-content: flex-start;
+    }
+
+    .navbar-default .navbar-nav > li > a {
+        font-size: 16px;
+        letter-spacing: 1.2px;
+        padding: 12px 16px;
     }
 }
 
