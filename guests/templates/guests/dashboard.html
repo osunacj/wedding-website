@@ -12,10 +12,6 @@
                 <td>{{ pending_invites }} ({{ pending_guests }} guests)</td>
             </tr>
             <tr>
-                <td>Unopened Invitations</td>
-                <td>{{ unopened_invite_count }}<span class="text-muted"> / {{ total_invites }}</span></td>
-            </tr>
-            <tr>
                 <td>Not Coming</td>
                 <td>{{ not_coming_guests }}</td>
             </tr>
@@ -101,19 +97,6 @@
         </div>
         <div class="row">
             <div class="col-lg-6">
-                <h1>Unopened Invitations</h1>
-                {% with party_list=parties_with_unopen_invites %}
-                    {% include "guests/partials/party_list.html" %}
-                {% endwith %}
-            </div>
-            <div class="col-lg-6">
-                <h1>Open Unresponded Invitations</h1>
-                {% with parties_with_open_unresponded_invites as party_list %}
-                    {% include "guests/partials/party_list.html" %}
-                {% endwith %}
-            </div>
-        </div>
-        <div class="col-lg-6">
                 <h1>Attending Guests Without Meals</h1>
                 {% with guest_list=guests_without_meals %}
                     {% include "guests/partials/guest_list.html" %}

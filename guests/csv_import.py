@@ -1,6 +1,5 @@
 import csv
 import io
-import uuid
 from guests.models import Party, Guest
 try:
     from StringIO import StringIO
@@ -24,8 +23,6 @@ def import_guests(path):
             party.type = party_type
             party.category = category
             party.is_invited = _is_true(is_invited)
-            if not party.invitation_id:
-                party.invitation_id = uuid.uuid4().hex
             party.save()
             if email:
                 guest, created = Guest.objects.get_or_create(party=party, email=email)

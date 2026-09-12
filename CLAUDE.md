@@ -45,10 +45,10 @@ Email backend is toggled with `MAIL_BACKEND`: `"console"` (default, logs to stdo
 
 ```bash
 python manage.py import_guests <csv_file>        # CSV must follow exact column order
-python manage.py send_save_the_dates --send --mark-sent
-python manage.py send_invitations --send --mark-sent
 python manage.py wipe_guest_list                 # destructive — resets all guest data
 ```
+
+Guests RSVP through a public form on the homepage (saved to the `RSVP` model), not through emailed/personalized invitation links — there is no invitation-sending system.
 
 CSV import expects columns in this order: `party_name, first_name, last_name, party_type, is_child, category, is_invited, email`.
 
@@ -61,4 +61,3 @@ Use feature branches and PRs for non-trivial changes; direct commits to master i
 - `Party.type` is hardcoded as `formal/fun/dimagi` — not a configurable enum.
 - The `docker-compose.yml` uses no named volumes; database data lives inside the container. Back up the database before any container teardown in production.
 - The Fabric-based `fabfile.py` (`fab production deploy`) is a legacy deployment path targeting `czue.org`. Docker is the preferred path going forward.
-- Invitation URLs use hex-encoded UUIDs stored in `Party.invitation_id`. Do not regenerate these after invitations are sent.

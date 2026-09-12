@@ -16,7 +16,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <!-- Always-visible mark for mobile/tablet; hidden at desktop widths in favor of the centered brand-desktop below -->
-                <a class="navbar-brand brand-mobile page-scroll collapse" href="#page-top">
+                <a class="navbar-brand brand-mobile page-scroll collapsed" href="#page-top">
                     <img src="{% static 'bigday/images/svgs/monogram.svg' %}" alt="{{ couple_name }}" class="navbar-monogram" width="58" height="58">
                 </a>
             </div>
@@ -27,25 +27,21 @@
                         <a class="page-scroll" href="#main-header">Home</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#hotels">Hotels</a>
+                        <a class="page-scroll" href="#program">Program</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#activities">Activities</a>
+                        <a class="page-scroll" href="#hotels">Hotels</a>
                     </li>
                 </ul>
-                <!-- Centered mark shown only at desktop widths; brand-mobile above covers mobile/tablet -->
                 <a class="navbar-brand brand-desktop page-scroll" href="#page-top">
                     <img src="{% static 'bigday/images/svgs/monogram.svg' %}" alt="{{ couple_name }}" class="navbar-monogram" width="72" height="72">
                 </a>
                 <ul class="nav navbar-nav nav-cluster nav-cluster-right">
                     <li>
-                        <a class="page-scroll" href="#plans">Plans</a>
+                        <a class="page-scroll" href="#rsvp">RSVP</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#venue">Venue</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#commute">Commute</a>
+                        <a class="page-scroll" href="#gifts">Gifts</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#contact">Contact</a>
@@ -53,11 +49,10 @@
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
+
     </nav>
     {% block main %}
-    <header id="main-header">
+    <header id="main-header" class="container-fluid">
         <div class="header-content">
             <div class="header-content-inner">
                 {% comment %}
@@ -70,73 +65,162 @@
             </div>
         </div>
     </header>
-    <!-- Hotels Section -->
-    <section id="hotels">
-        <div class="container">
+
+    <section id="our-story">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading great-vibes-regular">Our Story</h2>
+                    <hr>
+                    <p>
+                        Giovanna, born and raised in Rio de Janeiro, Brazil. Carlos, born in Mexico City, raised between Mexico, Guatemala, Colombia and Ireland. Two very different worlds, until 2019, when both landed in Venlo, a tiny Dutch town, for an exchange.</p>
+
+                        <p>Gio planned to stay 6 months. Carlos, a year. Carlos was determined to make the Brazilian fall for him. Gio was determined not to, but she failed miserably once she saw Carlos in the dance floor (or thats what he wants to believe). Gio stayed in the Netherlands to finish her studies. Carlos went back to Mexico, promising to return for his Master's (allegedly for academic reasons, but we all know that it was for Gio). Through a pandemic, long distance, and visa headaches, a Brazilian and a Mexican, the odds were never in their favor, made it work anyway.</p>
+                        <p>In 2025, under the warm and sunny Portugal, Carlos got down on one knee and (finally for Gio) asked.</p> 
+
+                        <p>
+                        This wedding marks the official celebration of their love, the beginning of a new family, the union of 2 cultures. For that, they selected the most special and important people, between family and friends, to celebrate their love. Living abroad is one of the hardest decisions, being far from family and friends, and that is why they prepared this celebration with all their loved ones. 
+                        </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- program Section -->
+    <section id="program" class="bg-secondary">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Program</h2>
+                    <hr>
+                    <h4>Pre-Wedding</h4>
+                    <p> 🗓️ 28 May 2027</p>
+                    <p> 16:00 h</p>
+                    <p>📍 The Paragon Hotel — Juan Salvador Agraz 97, Santa Fe, Contadero, Cuajimalpa de Morelos, 05348 CDMX </p>
+                    <hr>
+                    <h4>Wedding Day</h4>
+                    <p>🗓️ 29 May 2027</p>
+                    <p>🚶 Walk-in: 15:30–15:50 | Ceremony starts: 16:00</p>
+                    <p>📍 Cedrela Banquetes — Camino al Bosque no. 209, Col. Loma del Padre, CP 05020, CDMX </p>
+                    <p>👗 Dress code: Semi-formal </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <section id="hotels">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <h2 class="section-heading">Hotels</h2>
                     <hr>
-                    <p>Information about recommended hotels and accommodation options for guests will go here.</p>
+                    <p>Our official hotel is <p>
+                            The Paragon Hotel — book directly with them and use the code BODA GIO & CARLOS for a special wedding-weekend rate.</p>
+
+                        📍 Juan Salvador Agraz 97, Santa Fe, Contadero, Cuajimalpa de Morelos, 05348 CDMX
+
+                        Other nearby options:
+
+                        - City Express Plus Santa Fe — Juan Salvador Agraz 69, Santa Fe, Contadero, Cuajimalpa de Morelos, 05348 CDMX
+
+                        - Sleep Inn Mexico City — Carr. México-Toluca 5454, El Yaqui, Cuajimalpa de Morelos, 05320 CDMX
+
+                    </p>
+                        
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Activities Section -->
-    <section id="activities" class="bg-info">
-        <div class="container">
+
+    <!-- rsvp Section -->
+    <section id="rsvp" class="bg-secondary">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">Activities</h2>
+                    <h2 class="section-heading">RSVP</h2>
                     <hr>
-                    <p>Things to do before, during, and around the wedding will be listed here.</p>
+                    {% if rsvp_submitted %}
+                    <p>Thank you! Your RSVP has been received — we can't wait to celebrate with you.</p>
+                    {% else %}
+                    <p>We can't wait to celebrate with you! Please let us know if you'll be joining by [deadline] using the form below.</p>
+                    <form data-toggle="validator" method="post" action="{% url 'home' %}#rsvp" class="rsvp-form" novalidate>
+                        {% csrf_token %}
+                        <div class="rsvp-fields-row">
+                            <div class="form-group">
+                                <label for="id_first_name" class="rsvp-label">First Name<span class="required-mark">*</span></label>
+                                {{ rsvp_form.first_name }}
+                                {% if rsvp_form.first_name.errors %}<span class="help-block">{{ rsvp_form.first_name.errors|join:", " }}</span>{% endif %}
+                            </div>
+                            <div class="form-group">
+                                <label for="id_last_name" class="rsvp-label">Last Name<span class="required-mark">*</span></label>
+                                {{ rsvp_form.last_name }}
+                                {% if rsvp_form.last_name.errors %}<span class="help-block">{{ rsvp_form.last_name.errors|join:", " }}</span>{% endif %}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_email" class="rsvp-label">Email Address<span class="required-mark">*</span></label>
+                            {{ rsvp_form.email }}
+                            {% if rsvp_form.email.errors %}<span class="help-block">{{ rsvp_form.email.errors|join:", " }}</span>{% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_phone_number" class="rsvp-label">Phone Number</label>
+                            {{ rsvp_form.phone_number }}
+                        </div>
+                        <div class="form-group">
+                            <label class="rsvp-label">Attending</label>
+                            <div class="rsvp-options">
+                                <label class="rsvp-option">
+                                    <input class="attending-radio" type="radio" name="is_attending" value="yes" required
+                                        {% if rsvp_form.is_attending.value == "yes" %}checked{% endif %}>
+                                    <span>Accept with pleasure</span>
+                                </label>
+                                <label class="rsvp-option">
+                                    <input class="attending-radio" type="radio" name="is_attending" value="no" required
+                                        {% if rsvp_form.is_attending.value == "no" %}checked{% endif %}>
+                                    <span>Regretfully decline</span>
+                                </label>
+                            </div>
+                            {% if rsvp_form.is_attending.errors %}<span class="help-block">{{ rsvp_form.is_attending.errors|join:", " }}</span>{% endif %}
+                        </div>
+                        <div class="form-group" id="guest-count-group">
+                            <label class="rsvp-label">Number of Guests</label>
+                            <div class="rsvp-options">
+                                {% for value, text in rsvp_form.fields.guest_count.choices %}
+                                <label class="rsvp-option">
+                                    <input type="radio" name="guest_count" value="{{ value }}"
+                                        {% if rsvp_form.guest_count.value == value %}checked{% endif %}>
+                                    <span>{{ text }}</span>
+                                </label>
+                                {% endfor %}
+                            </div>
+                            {% if rsvp_form.guest_count.errors %}<span class="help-block">{{ rsvp_form.guest_count.errors|join:", " }}</span>{% endif %}
+                        </div>
+                        <div class="form-group text-center">
+                            <input type="submit" class="btn btn-primary" value="Send Response">
+                        </div>
+                    </form>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Plans Section -->
-    <section id="plans">
-        <div class="container">
+    <!-- gifts Section -->
+    <section id="gifts">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">Plans</h2>
+                    <h2 class="section-heading">Gifts</h2>
                     <hr>
-                    <p>The full schedule and itinerary for wedding events will go here.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Venue Section -->
-    <section id="venue" class="bg-info">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">Venue</h2>
-                    <hr>
-                    <p>Location details and information about the wedding venue will go here.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Commute Section -->
-    <section id="commute">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">Commute</h2>
-                    <hr>
-                    <p>Transportation options and directions for getting to the venue will go here.</p>
+                    <p>Truth is, having you there is already the best gift we could ask for. But if you'd still like to spoil us a little (towards our honeymoon or our first home), you can send a little something our way. It also saves our suitcases from an overweight fee on the way back 😉</p>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="contact" class="bg-dark">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <h2 class="section-heading">Contact us!</h2>
@@ -160,4 +244,27 @@
     <script src="{% static 'creative/js/jquery.fittext.js' %}"></script>
     <!-- Custom Theme JavaScript -->
     <script src="{% static 'creative/js/creative.js' %}"></script>
+    <!-- Client-side validation for the RSVP form -->
+    <script src="{% static 'validator.js' %}"></script>
+    <script>
+        $(function () {
+            // Number of guests only applies if they're attending; mute/require
+            // it accordingly as the user picks yes/no.
+            $('.rsvp-form input.attending-radio').change(function (e) {
+                var attending = $(e.target).val() === 'yes';
+                var guestCountGroup = $('#guest-count-group');
+                var guestCountRadios = guestCountGroup.find('input[type=radio]');
+                if (attending) {
+                    guestCountGroup.removeClass('text-muted');
+                    guestCountRadios.prop('disabled', false).prop('required', true);
+                } else {
+                    guestCountGroup.addClass('text-muted');
+                    guestCountRadios.prop('checked', false).prop('disabled', true).prop('required', false);
+                }
+                // reload validation now that required/disabled changed
+                $('.rsvp-form').validator('destroy');
+                $('.rsvp-form').validator();
+            });
+        });
+    </script>
 {% endblock %}

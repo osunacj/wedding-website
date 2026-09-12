@@ -159,11 +159,10 @@ BRIDE_AND_GROOM = 'Giovanna and Carlos'
 WEDDING_DATE = 'January 1st, 1969'
 # the location of your wedding
 WEDDING_LOCATION = 'North Pole, USA'
-# This is used in links in save the date / invitations
+# This is used in links shared around the site (e.g. the footer)
 WEDDING_WEBSITE_URL = 'https://thehappycouple.com'
 # base address for all emails
-DEFAULT_WEDDING_EMAIL = 'happilyeverafter@example.com'
-WEDDING_CC_LIST = [] 
+DEFAULT_WEDDING_EMAIL = 'gitartari@gmail.com'
 
 # Checks, if the 'localsettings.py' is present and set some couple variables
 # which are used in a few places.
@@ -181,9 +180,5 @@ elif (MAIL_BACKEND == 'smtp'):
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' # Set email backend to use SMTP
 
 
-# the address your emails (save the dates/invites/etc.) will come from
-DEFAULT_WEDDING_FROM_EMAIL = BRIDE_AND_GROOM + ' <' + DEFAULT_WEDDING_EMAIL + '>' # change to 'address@domain.tld'
-# when sending test emails it will use this address
-DEFAULT_WEDDING_TEST_EMAIL = DEFAULT_WEDDING_FROM_EMAIL
 # the default reply-to of your emails, change, if you want to have your replies somewhere else
 DEFAULT_WEDDING_REPLY_EMAIL = DEFAULT_WEDDING_EMAIL

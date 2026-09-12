@@ -1,9 +1,7 @@
 from __future__ import unicode_literals
-import datetime
 import uuid
 
 from django.db import models
-from django.dispatch import receiver
 
 # these will determine the default formality of correspondence
 ALLOWED_TYPES = [
@@ -14,6 +12,11 @@ ALLOWED_TYPES = [
 
 
 def _random_uuid():
+    # No longer used by any current field (it used to default Party.invitation_id,
+    # which has been removed along with the rest of the invitation system) -
+    # but several historical migrations still import this by dotted path as a
+    # stored field default, so it has to stay for `migrate` to replay cleanly
+    # on a fresh database.
     return uuid.uuid4().hex
 
 
@@ -24,11 +27,6 @@ class Party(models.Model):
     name = models.TextField()
     type = models.CharField(max_length=10, choices=ALLOWED_TYPES)
     category = models.CharField(max_length=20, null=True, blank=True)
-    save_the_date_sent = models.DateTimeField(null=True, blank=True, default=None)
-    save_the_date_opened = models.DateTimeField(null=True, blank=True, default=None)
-    invitation_id = models.CharField(max_length=32, db_index=True, default=_random_uuid, unique=True)
-    invitation_sent = models.DateTimeField(null=True, blank=True, default=None)
-    invitation_opened = models.DateTimeField(null=True, blank=True, default=None)
     is_invited = models.BooleanField(default=False)
     rehearsal_dinner = models.BooleanField(default=False)
     is_attending = models.BooleanField(default=None, null=True)
@@ -85,3 +83,29 @@ class Guest(models.Model):
 
     def __str__(self):
         return 'Guest: {} {}'.format(self.first_name, self.last_name)
+
+
+class RSVP(models.Model):
+    """
+    A general, public RSVP submitted through the homepage form. Anyone can
+    submit one of these, independent of the Party/Guest guest list.
+    """
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=30, blank=True)
+    is_attending = models.BooleanField()
+    # only meaningful when is_attending is True
+    guest_count = models.PositiveSmallIntegerField(null=True, blank=True)
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def full_name(self):
+        return '{} {}'.format(self.first_name, self.last_name)
+
+    def __str__(self):
+        if self.is_attending:
+            return '{} (attending, {} guest{})'.format(
+                self.full_name, self.guest_count, '' if self.guest_count == 1 else 's'
+            )
+        return '{} (not attending)'.format(self.full_name)
