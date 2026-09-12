@@ -20,3 +20,38 @@ WEDDING_WEBSITE_URL = 'https://thehappycouple.com'
 
 # Django secret. You must change this!
 SECRET_KEY = 'Decibel-Dutiful-Nintendo-Gala0'
+
+# Your real bank account details for the Gifts section. This file is
+# gitignored, so put the real values here rather than in settings.py.
+# Uncomment and fill in - 'details' is a list of (label, value) pairs, so
+# each account can show whatever fields make sense for it.
+# GIFT_ACCOUNTS = [
+#     {
+#         'flag': '🇪🇺',
+#         'country': 'Europe',
+#         'details': [
+#             ('Bank', 'Your bank name'),
+#             ('Account holder', 'Account holder name'),
+#             ('IBAN', 'XX00 0000 0000 0000 0000 00'),
+#             ('SWIFT/BIC', 'XXXXXXXX'),
+#         ],
+#     },
+#     {
+#         'flag': '🇧🇷',
+#         'country': 'Brazil',
+#         'details': [
+#             ('Banco', 'Nome do banco'),
+#             ('Titular', 'Nome do titular'),
+#             ('Chave PIX', 'chave-pix@example.com'),
+#         ],
+#     },
+#     {
+#         'flag': '🇲🇽',
+#         'country': 'Mexico',
+#         'details': [
+#             ('Banco', 'Nombre del banco'),
+#             ('Titular', 'Nombre del titular'),
+#             ('CLABE', '000000000000000000'),
+#         ],
+#     },
+# ]

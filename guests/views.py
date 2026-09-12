@@ -29,6 +29,7 @@ def home(request):
         'wedding_date': settings.WEDDING_DATE,
         'rsvp_form': rsvp_form,
         'rsvp_submitted': rsvp_submitted,
+        'gift_accounts': settings.GIFT_ACCOUNTS,
     })
 
 

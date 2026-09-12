@@ -164,6 +164,42 @@ WEDDING_WEBSITE_URL = 'https://thehappycouple.com'
 # base address for all emails
 DEFAULT_WEDDING_EMAIL = 'gitartari@gmail.com'
 
+# Bank account details shown on the Gifts section, one per flag/country
+# option. This placeholder version has no real data in it - put your real
+# account details in 'localsettings.py' instead (it's gitignored, so they
+# never get committed) using the same structure. 'details' is a flat list
+# of (label, value) pairs so each country can show whatever fields make
+# sense for it (IBAN/SWIFT, PIX key, CLABE, etc).
+GIFT_ACCOUNTS = [
+    {
+        'flag': '🇪🇺',
+        'country': 'Europe',
+        'details': [
+            ('Bank', 'Your bank name'),
+            ('Account holder', 'Account holder name'),
+            ('IBAN', 'XX00 0000 0000 0000 0000 00'),
+        ],
+    },
+    {
+        'flag': '🇧🇷',
+        'country': 'Brazil',
+        'details': [
+            ('Banco', 'Nome do banco'),
+            ('Titular', 'Nome do titular'),
+            ('Chave PIX', 'chave-pix@example.com'),
+        ],
+    },
+    {
+        'flag': '🇲🇽',
+        'country': 'Mexico',
+        'details': [
+            ('Banco', 'Nombre del banco'),
+            ('Titular', 'Nombre del titular'),
+            ('CLABE', '000000000000000000'),
+        ],
+    },
+]
+
 # Checks, if the 'localsettings.py' is present and set some couple variables
 # which are used in a few places.
 # Otherwise it will just use some defaults above will persist.
