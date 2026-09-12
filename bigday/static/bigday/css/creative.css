@@ -263,14 +263,9 @@ header {
 
 #main-header {
     background-image: url('../images/posing_at_bridge.jpeg');
-}
-
-
-@media (min-width: 1300px) {
-    #main-header {
-        box-shadow: -12px 0 24px -8px rgba(0, 0, 0, 0.12),
-                     12px 0 24px -8px rgba(0, 0, 0, 0.12);
-    }
+    /* Same drop shadow as the Our Story photo (.our-story-photo img), so the
+       two photos on the page read as a matching pair. */
+    box-shadow: 0 12px 24px -8px rgba(0, 0, 0, .25);
 }
 
 header .header-content {
@@ -431,6 +426,70 @@ header .header-content .header-content-inner p {
     .our-story-text {
         text-align: center;
         margin-top: 20px;
+    }
+}
+
+/* Countdown: a small strip right after the hero photo, months/days/hours/
+   minutes until the ceremony, with a cursive tagline and mini dot
+   separators between the numbers instead of a full section heading/divider. */
+#countdown {
+    padding: 25px 0;
+}
+
+.countdown-intro {
+    margin: 0 0 8px;
+    font-size: 20px;
+    color: #a85c66;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 4px 6px;
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 46px;
+}
+
+.countdown-value {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(18px, 3vw, 26px);
+    font-weight: 700;
+    line-height: 1;
+    color: #4f652c;
+}
+
+.countdown-label {
+    margin-top: 3px;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #3a2a20;
+}
+
+.countdown-sep {
+    align-self: center;
+    margin-top: -4px;
+    font-size: clamp(22px, 2.2vw, 22px);
+    color: #a85c66;
+    line-height: 2;
+}
+
+@media (max-width: 480px) {
+    .countdown {
+        gap: 8px 8px;
+    }
+
+    .countdown-sep {
+        display: none;
     }
 }
 

@@ -66,6 +66,38 @@
         </div>
     </header>
 
+    <!-- countdown -->
+    <section id="countdown">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <p class="countdown-intro great-vibes-regular">Counting down to our wedding day</p>
+                    <div class="countdown" data-countdown-target="2027-05-29T16:00:00">
+                        <div class="countdown-item">
+                            <span class="countdown-value" data-unit="months">00</span>
+                            <span class="countdown-label">Months</span>
+                        </div>
+                        <div class="countdown-sep">&middot;</div>
+                        <div class="countdown-item">
+                            <span class="countdown-value" data-unit="days">00</span>
+                            <span class="countdown-label">Days</span>
+                        </div>
+                        <div class="countdown-sep">&middot;</div>
+                        <div class="countdown-item">
+                            <span class="countdown-value" data-unit="hours">00</span>
+                            <span class="countdown-label">Hours</span>
+                        </div>
+                        <div class="countdown-sep">&middot;</div>
+                        <div class="countdown-item">
+                            <span class="countdown-value" data-unit="minutes">00</span>
+                            <span class="countdown-label">Minutes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="our-story">
         <div class="container-fluid">
             <div class="our-story-row">
@@ -328,5 +360,59 @@
                 $('.rsvp-form').validator();
             });
         });
+    </script>
+    <!-- Months/days/hours/minutes countdown to the wedding -->
+    <script>
+        (function () {
+            var el = document.querySelector('.countdown');
+            if (!el) {
+                return;
+            }
+            var target = new Date(el.getAttribute('data-countdown-target'));
+            var valueEls = {
+                months: el.querySelector('[data-unit="months"]'),
+                days: el.querySelector('[data-unit="days"]'),
+                hours: el.querySelector('[data-unit="hours"]'),
+                minutes: el.querySelector('[data-unit="minutes"]')
+            };
+
+            function pad(n) {
+                return n < 10 ? '0' + n : String(n);
+            }
+
+            function update() {
+                var now = new Date();
+
+                // Calendar-aware breakdown so "months" reflects actual
+                // month lengths rather than a fixed 30-day estimate.
+                var months = (target.getFullYear() - now.getFullYear()) * 12 + (target.getMonth() - now.getMonth());
+                var cursor = new Date(now);
+                cursor.setMonth(cursor.getMonth() + months);
+                if (cursor > target) {
+                    months -= 1;
+                    cursor.setMonth(cursor.getMonth() - 1);
+                }
+
+                var diffMs = target - cursor;
+                if (diffMs < 0) {
+                    // The big day has arrived - just show zeros.
+                    months = 0;
+                    diffMs = 0;
+                }
+
+                var totalMinutes = Math.floor(diffMs / 60000);
+                var days = Math.floor(totalMinutes / (60 * 24));
+                var hours = Math.floor((totalMinutes % (60 * 24)) / 60);
+                var minutes = totalMinutes % 60;
+
+                valueEls.months.textContent = pad(months);
+                valueEls.days.textContent = pad(days);
+                valueEls.hours.textContent = pad(hours);
+                valueEls.minutes.textContent = pad(minutes);
+            }
+
+            update();
+            setInterval(update, 60000);
+        })();
     </script>
 {% endblock %}
