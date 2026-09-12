@@ -200,18 +200,15 @@ section {
     }
 
     #mainNav .navbar-collapse {
-        position: relative;
         display: flex !important;
+        align-items: center;
         height: clamp(80px, 12vw, 112px);
     }
 
     .navbar-default .brand-desktop {
         display: flex;
         align-items: center;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        flex: 0 0 auto;
         margin: 0;
     }
 
@@ -219,7 +216,6 @@ section {
         /* Shrinks along with the rest of the nav at the low end of the
            768px+ range so it doesn't force extra width the links don't have. */
         max-height: clamp(48px, 6vw, 72px);
-        margin-top: 15px;
     }
 
     .navbar-default .nav-cluster {
@@ -227,17 +223,22 @@ section {
         min-width: 0;
         display: flex;
         align-items: center;
-        margin-top: 20px;
     }
 
+    /* Just breathing room next to the monogram now - the monogram is a real
+       flex sibling (flex: 0 0 auto above) that already claims its own width
+       out of the row, so this only needs a small gap, not a large reserved
+       zone like it did when the monogram floated on top via
+       position: absolute and this padding was the only thing keeping the
+       clusters clear of it. */
     .navbar-default .nav-cluster-left {
         justify-content: flex-end;
-        padding-right: clamp(40px, 8vw, 100px);
+        padding-right: clamp(16px, 3vw, 40px);
     }
 
     .navbar-default .nav-cluster-right {
         justify-content: flex-start;
-        padding-left: clamp(40px, 8vw, 100px);
+        padding-left: clamp(16px, 3vw, 40px);
     }
 
     .navbar-default .navbar-nav > li > a {
