@@ -1,0 +1,72 @@
+<!-- rsvp Section -->
+<section id="rsvp" class="bg-secondary">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h2 class="section-heading">RSVP</h2>
+                <hr>
+                {% if rsvp_submitted %}
+                <p>Thank you! Your RSVP has been received — we can't wait to celebrate with you.</p>
+                {% else %}
+                <p>We can't wait to celebrate with you! Please let us know if you'll be joining by [deadline] using the form below.</p>
+                <form data-toggle="validator" method="post" action="{% url 'home' %}#rsvp" class="rsvp-form" novalidate>
+                    {% csrf_token %}
+                    <div class="rsvp-fields-row">
+                        <div class="form-group">
+                            <label for="id_first_name" class="rsvp-label">First Name<span class="required-mark">*</span></label>
+                            {{ rsvp_form.first_name }}
+                            {% if rsvp_form.first_name.errors %}<span class="help-block">{{ rsvp_form.first_name.errors|join:", " }}</span>{% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_last_name" class="rsvp-label">Last Name<span class="required-mark">*</span></label>
+                            {{ rsvp_form.last_name }}
+                            {% if rsvp_form.last_name.errors %}<span class="help-block">{{ rsvp_form.last_name.errors|join:", " }}</span>{% endif %}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_email" class="rsvp-label">Email Address<span class="required-mark">*</span></label>
+                        {{ rsvp_form.email }}
+                        {% if rsvp_form.email.errors %}<span class="help-block">{{ rsvp_form.email.errors|join:", " }}</span>{% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_phone_number" class="rsvp-label">Phone Number</label>
+                        {{ rsvp_form.phone_number }}
+                    </div>
+                    <div class="form-group">
+                        <label class="rsvp-label">Attending</label>
+                        <div class="rsvp-options">
+                            <label class="rsvp-option">
+                                <input class="attending-radio" type="radio" name="is_attending" value="yes" required
+                                    {% if rsvp_form.is_attending.value == "yes" %}checked{% endif %}>
+                                <span>Accept with pleasure</span>
+                            </label>
+                            <label class="rsvp-option">
+                                <input class="attending-radio" type="radio" name="is_attending" value="no" required
+                                    {% if rsvp_form.is_attending.value == "no" %}checked{% endif %}>
+                                <span>Regretfully decline</span>
+                            </label>
+                        </div>
+                        {% if rsvp_form.is_attending.errors %}<span class="help-block">{{ rsvp_form.is_attending.errors|join:", " }}</span>{% endif %}
+                    </div>
+                    <div class="form-group" id="guest-count-group">
+                        <label class="rsvp-label">Number of Guests</label>
+                        <div class="rsvp-options">
+                            {% for value, text in rsvp_form.fields.guest_count.choices %}
+                            <label class="rsvp-option">
+                                <input type="radio" name="guest_count" value="{{ value }}"
+                                    {% if rsvp_form.guest_count.value == value %}checked{% endif %}>
+                                <span>{{ text }}</span>
+                            </label>
+                            {% endfor %}
+                        </div>
+                        {% if rsvp_form.guest_count.errors %}<span class="help-block">{{ rsvp_form.guest_count.errors|join:", " }}</span>{% endif %}
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="submit" class="btn btn-primary" value="Send Response">
+                    </div>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>

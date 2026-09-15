@@ -1,0 +1,47 @@
+{% load static %}
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- Always-visible mark for mobile/tablet; hidden at desktop widths in favor of the centered brand-desktop below -->
+            <a class="navbar-brand brand-mobile page-scroll collapsed" href="#page-top">
+                <img src="{% static 'bigday/images/svgs/monogram.svg' %}" alt="{{ couple_name }}" class="navbar-monogram" width="58" height="58">
+            </a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav nav-cluster nav-cluster-left">
+                <li>
+                    <a class="page-scroll" href="#main-header">Home</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#program">Program</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#hotels">Hotels</a>
+                </li>
+            </ul>
+            <a class="navbar-brand brand-desktop page-scroll" href="#page-top">
+                <img src="{% static 'bigday/images/svgs/monogram.svg' %}" alt="{{ couple_name }}" class="navbar-monogram" width="72" height="72">
+            </a>
+            <ul class="nav navbar-nav nav-cluster nav-cluster-right">
+                <li>
+                    <a class="page-scroll" href="#rsvp">RSVP</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#gifts">Gifts</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+
+</nav>

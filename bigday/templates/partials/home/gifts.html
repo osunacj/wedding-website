@@ -1,0 +1,35 @@
+<!-- gifts Section -->
+<section id="gifts">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <h2 class="section-heading">Gifts</h2>
+                <hr>
+                <p>Truth is, having you there is already the best gift we could ask for. But if you'd still like to spoil us a little (towards our honeymoon or our first home), you can send a little something our way. It also saves our suitcases from an overweight fee on the way back 😉</p>
+                <div class="gift-picker">
+                    <div class="rsvp-options gift-flag-row">
+                        {% for account in gift_accounts %}
+                        <label class="rsvp-option">
+                            <input type="radio" name="gift_account" value="{{ forloop.counter0 }}">
+                            <span>{{ account.flag }} {{ account.country }}</span>
+                        </label>
+                        {% endfor %}
+                    </div>
+                    {% for account in gift_accounts %}
+                    <div class="gift-account-details" data-account-panel="{{ forloop.counter0 }}">
+                        <h4>{{ account.flag }} {{ account.country }}</h4>
+                        <dl>
+                            {% for label, value in account.details %}
+                            <div class="gift-account-row">
+                                <dt>{{ label }}</dt>
+                                <dd>{{ value }}</dd>
+                            </div>
+                            {% endfor %}
+                        </dl>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
