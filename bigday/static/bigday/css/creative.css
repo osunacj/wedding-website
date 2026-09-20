@@ -559,6 +559,47 @@ header .header-content .header-content-inner p {
     line-height: 1.6;
 }
 
+.program-item-note {
+    margin: 14px 0 0;
+    padding: 14px 18px;
+    background: rgba(58, 42, 32, .05);
+    border-left: 3px solid #a85c66;
+}
+
+.program-item-note-title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .3px;
+    color: #4f652c;
+}
+
+.program-item-note a {
+    color: #4f652c;
+    text-decoration: none;
+}
+
+.program-item-note a:hover,
+.program-item-note a:focus {
+    color: #a85c66;
+    text-decoration: underline;
+}
+
+.program-item-note p {
+    margin: 8px 0 0;
+    color: rgba(58, 42, 32, .75);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.program-item-note-photo {
+    display: block;
+    margin-top: 12px;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid rgba(58, 42, 32, .2);
+}
+
 @media (max-width: 767px) {
     .program-group {
         flex-direction: column;
@@ -593,9 +634,10 @@ header .header-content .header-content-inner p {
 }
 
 .hotel-card {
-    flex: 1 1 260px;
+    height: 100%;
     padding: 20px 24px;
     border: 1px solid #3a2a20;
+    box-sizing: border-box;
 }
 
 .hotel-card h4 {
@@ -614,7 +656,6 @@ header .header-content .header-content-inner p {
 }
 
 .hotel-card-featured {
-    flex: 1 1 100%;
     border-color: #4f652c;
     background-color: rgba(79, 101, 44, .06);
 }
@@ -633,6 +674,32 @@ header .header-content .header-content-inner p {
 
 .hotel-card-code strong {
     color: #4f652c;
+}
+
+/* Each card is wrapped in this link so the whole card acts as a button that
+   opens that hotel's location on Google Maps. */
+.hotel-card-btn {
+    display: block;
+    flex: 1 1 260px;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.hotel-card-btn-featured {
+    flex: 1 1 100%;
+}
+
+.hotel-card-btn:hover,
+.hotel-card-btn:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(58, 42, 32, .15);
+}
+
+.hotel-card-btn:hover .hotel-card,
+.hotel-card-btn:focus .hotel-card {
+    border-color: #a85c66;
 }
 
 .rsvp-form {
