@@ -4,10 +4,6 @@ services:
   postgres:
     container_name: postgres-wedding
     image: postgres
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=wedding
     ports:
       - 5432:5432
     volumes:
@@ -15,17 +11,6 @@ services:
   wedding:
     container_name: wedding
     build: .
-    environment:
-      - DEBUG=False
-      - SECRET_KEY=changeme
-      - POSTGRES_SERVER=http://localhost:5432/
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=wedding
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_PORT=5432
-      - DJANGO_SUPERUSER_PASSWORD=changeme
-      - DJANGO_SUPERUSER_USERNAME=admin
-      - DJANGO_SUPERUSER_EMAIL=admin@example.com
     ports:
       - 8080:8080
     depends_on:

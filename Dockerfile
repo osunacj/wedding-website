@@ -15,6 +15,13 @@ COPY deploy/nginx.conf /etc/nginx/sites-enabled/default
 COPY . app
 WORKDIR /app
 
+# Run as the unprivileged user nginx's own package already created, instead of root.
+# nginx's default pid path (/run/nginx.pid) isn't writable by a non-root user, so
+# point it at /tmp instead.
+RUN sed -i 's#pid /run/nginx.pid;#pid /tmp/nginx.pid;#' /etc/nginx/nginx.conf \
+    && chown -R www-data:www-data /app /var/log/nginx /var/lib/nginx
+USER www-data
+
 EXPOSE 8080
 
 # runs the production server
