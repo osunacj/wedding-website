@@ -28,10 +28,10 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # This is a default value and must be changed!
 # Rename "localsettings.py.template" to 'localsettings.py' and edit your settings.
 # To protect your credentials from leaking to your Git server we added 'localsettings.py' to the gitignore
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY', default='this-is-something-to-change')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env("DEBUG", False)
+DEBUG = env("DEBUG", default=False)
 
 # Set to "console" for console output of emails or to "smtp" to send real mails
 MAIL_BACKEND = "console"
@@ -150,16 +150,16 @@ STATICFILES_DIRS = (
 
 # Some default values. Will be overwritten by a localsetting.py (rename 'localsettings.py.template' to 'localsettings.py')
 # This is used in a few places where the names of the couple are used
-BRIDE_AND_GROOM = env("BRIDE_AND_GROOM", 'Romeo and Juliet')
+BRIDE_AND_GROOM = env("BRIDE_AND_GROOM", default='Romeo and Juliet')
 # the date and time of your wedding, in ISO 8601 format - also drives the
 # homepage countdown timer, which parses it as a JS Date
-WEDDING_DATE = env("WEDDING_DATE", '2027-05-29T16:00:00')
+WEDDING_DATE = env("WEDDING_DATE", default='2027-05-29T16:00:00')
 # the location of your wedding
-WEDDING_LOCATION = env("WEDDING_LOCATION", 'Mexico')
+WEDDING_LOCATION = env("WEDDING_LOCATION", default='Mexico')
 # This is used in links shared around the site (e.g. the footer)
-WEDDING_WEBSITE_URL = env("WEDDING_WEBSITE_URL", 'wedding.com')
+WEDDING_WEBSITE_URL = env("WEDDING_WEBSITE_URL", default='wedding.com')
 # base address for all emails
-DEFAULT_WEDDING_EMAIL = env("DEFAULT_WEDDING_EMAIL", "romeaoandjuliet@email.com")
+DEFAULT_WEDDING_EMAIL = env("DEFAULT_WEDDING_EMAIL", default="romeaoandjuliet@email.com")
 
 # Bank account details shown on the Gifts section, one per flag/country
 # option. This placeholder version has no real data in it - put your real
