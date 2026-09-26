@@ -6,8 +6,6 @@ RUN apt-get update && apt-get install nginx --yes
 COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY deploy/prod-requirements.txt prod-requirements.txt
-RUN pip install --no-cache-dir -r prod-requirements.txt
 
 COPY deploy/nginx.conf /etc/nginx/sites-enabled/default
 
