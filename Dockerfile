@@ -25,4 +25,4 @@ USER www-data
 EXPOSE 8080
 
 # runs the production server
-CMD ["/bin/bash", "-c", "python manage.py collectstatic --noinput; python manage.py migrate; python manage.py createsuperuser --noinput; /usr/sbin/nginx -g 'daemon off;' & gunicorn bigday.wsgi --bind 0.0.0.0:8000"]
+CMD ["/bin/bash", "-c", "python manage.py collectstatic --noinput; python manage.py migrate; python manage.py createsuperuser --noinput; /usr/sbin/nginx -g 'daemon off;' & gunicorn bigday.wsgi --bind 0.0.0.0:8080"]
