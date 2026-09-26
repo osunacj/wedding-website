@@ -36,7 +36,8 @@ DEBUG = env("DEBUG", default=False)
 # Set to "console" for console output of emails or to "smtp" to send real mails
 MAIL_BACKEND = "console"
 
-ALLOWED_HOSTS = ["my_website_url", "localhost"]
+# comma-separated list of allowed hosts, e.g. "example.com,www.example.com"
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["localhost"])
 CSRF_TRUSTED_ORIGINS = [
     "http://example.com",
     'http://127.0.0.1'
