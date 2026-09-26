@@ -28,10 +28,10 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # This is a default value and must be changed!
 # Rename "localsettings.py.template" to 'localsettings.py' and edit your settings.
 # To protect your credentials from leaking to your Git server we added 'localsettings.py' to the gitignore
-SECRET_KEY = env('SECRET_KEY', default='u7!-y4k1c6b44q507nr_l+c^12o7ur++cpzyn!$65w^!gum@h%')
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env("DEBUG", False)
 
 # Set to "console" for console output of emails or to "smtp" to send real mails
 MAIL_BACKEND = "console"
@@ -39,7 +39,7 @@ MAIL_BACKEND = "console"
 ALLOWED_HOSTS = ["my_website_url", "localhost"]
 CSRF_TRUSTED_ORIGINS = [
     "http://example.com",
-    'https://127.0.0.1'
+    'http://127.0.0.1'
 ]
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
@@ -74,6 +74,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join('bigday', 'templates'),
+            os.path.join('guests', 'templates')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -95,18 +96,13 @@ WSGI_APPLICATION = 'bigday.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
-    # if you want to use the postgres database just uncomment the following lines and comment out the sqlite3 lines
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': env('POSTGRES_DB'),
-    #     'USER': env('POSTGRES_USER'),
-    #     'PASSWORD': env('POSTGRES_PASSWORD'),
-    #     'HOST': env('POSTGRES_SERVER'),
-    #     'PORT': env('POSTGRES_PORT'),
-    # }
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('POSTGRES_DB'),
+        'USER': env('POSTGRES_USER'),
+        'PASSWORD': env('POSTGRES_PASSWORD'),
+        'HOST': env('POSTGRES_SERVER'),
+        'PORT': env('POSTGRES_PORT'),
+    }
 }
 
 
@@ -154,15 +150,16 @@ STATICFILES_DIRS = (
 
 # Some default values. Will be overwritten by a localsetting.py (rename 'localsettings.py.template' to 'localsettings.py')
 # This is used in a few places where the names of the couple are used
-BRIDE_AND_GROOM = 'Giovanna and Carlos'
-# the date of your wedding
-WEDDING_DATE = 'January 1st, 1969'
+BRIDE_AND_GROOM = env("BRIDE_AND_GROOM", 'Romeo and Juliet')
+# the date and time of your wedding, in ISO 8601 format - also drives the
+# homepage countdown timer, which parses it as a JS Date
+WEDDING_DATE = env("WEDDING_DATE", '2027-05-29T16:00:00')
 # the location of your wedding
-WEDDING_LOCATION = 'North Pole, USA'
+WEDDING_LOCATION = env("WEDDING_LOCATION", 'Mexico')
 # This is used in links shared around the site (e.g. the footer)
-WEDDING_WEBSITE_URL = 'https://thehappycouple.com'
+WEDDING_WEBSITE_URL = env("WEDDING_WEBSITE_URL", 'wedding.com')
 # base address for all emails
-DEFAULT_WEDDING_EMAIL = 'gitartari@gmail.com'
+DEFAULT_WEDDING_EMAIL = env("DEFAULT_WEDDING_EMAIL", "romeaoandjuliet@email.com")
 
 # Bank account details shown on the Gifts section, one per flag/country
 # option. This placeholder version has no real data in it - put your real
