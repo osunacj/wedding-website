@@ -13,9 +13,11 @@ DEFAULT_WEDDING_REPLY_EMAIL = 'happilyeverafter@example.com'
 BRIDE_AND_GROOM = 'Your names'
 # the location of your wedding
 WEDDING_LOCATION = 'Somewhere special'
-# the date and time of your wedding, in ISO 8601 format - also drives the
-# homepage countdown timer, which parses it as a JS Date
+# the local date and time of your wedding, in ISO 8601 format - also drives the
+# homepage countdown timer
 WEDDING_DATE = '2027-05-29T16:00:00'
+# timezone of the venue, used when WEDDING_DATE has no UTC offset
+WEDDING_TIMEZONE = 'America/Mexico_City'
 # this is used in links shared around the site (e.g. the footer)
 WEDDING_WEBSITE_URL = 'https://thehappycouple.com'
 

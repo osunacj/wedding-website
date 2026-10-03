@@ -18,8 +18,15 @@
                     </p>
             </div>
         </div>
-        <div class="our-story-photo">
-            <img src="{% static 'bigday/images/hand_kiss.jpeg' %}" alt="{{ couple_name }}">
+        <div class="our-story-photo" data-carousel-interval="5000">
+            {% comment %}
+            To add a photo: drop it in bigday/static/bigday/images/ and add a line like this below
+            (only the first photo has class="is-active"; the rest load lazily):
+            <img src="{% static 'bigday/images/your_photo.jpeg' %}" alt="{{ couple_name }}" loading="lazy">
+            {% endcomment %}
+            <img src="{% static 'bigday/images/hand_kiss.jpeg' %}" alt="{{ couple_name }}" class="is-active">
+            <img src="{% static 'bigday/images/w118.jpeg' %}" alt="{{ couple_name }}" loading="lazy">
+            <img src="{% static 'bigday/images/w156.jpeg' %}" alt="{{ couple_name }}" loading="lazy">
         </div>
     </div>
 </section>

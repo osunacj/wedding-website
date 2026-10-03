@@ -5,6 +5,14 @@
             <div class="col-lg-8 col-lg-offset-2 text-center">
                 <h2 class="section-heading">RSVP</h2>
                 <hr>
+                <div class="rsvp-coming-soon">
+                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                    <h3>Coming soon</h3>
+                    <p>We're putting the finishing touches on our RSVP form. Check back here soon to let us know if you'll be joining us!</p>
+                </div>
+                {% comment %}
+                RSVP form disabled until the remaining functionality is ready.
+                Remove this comment block (and the coming-soon card above) to re-enable it.
                 {% if rsvp_submitted %}
                 <p>Thank you! Your RSVP has been received — we can't wait to celebrate with you.</p>
                 {% else %}
@@ -66,6 +74,7 @@
                     </div>
                 </form>
                 {% endif %}
+                {% endcomment %}
             </div>
         </div>
     </div>

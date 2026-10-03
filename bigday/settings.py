@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 import os
+import re
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 import environ
 
@@ -152,9 +155,12 @@ STATICFILES_DIRS = (
 # Some default values. Will be overwritten by a localsetting.py (rename 'localsettings.py.template' to 'localsettings.py')
 # This is used in a few places where the names of the couple are used
 BRIDE_AND_GROOM = env("BRIDE_AND_GROOM", default='Romeo and Juliet')
-# the date and time of your wedding, in ISO 8601 format - also drives the
-# homepage countdown timer, which parses it as a JS Date
+# the local date and time of your wedding, in ISO 8601 format - also drives
+# the homepage countdown timer. Either leave the offset off and set
+# WEDDING_TIMEZONE, or include one (e.g. '2027-05-29T16:00:00-06:00').
 WEDDING_DATE = env("WEDDING_DATE", default='2027-05-29T16:00:00')
+# IANA timezone name of the wedding venue, used when WEDDING_DATE has no offset
+WEDDING_TIMEZONE = env("WEDDING_TIMEZONE", default='Mexico_City')
 # the location of your wedding
 WEDDING_LOCATION = env("WEDDING_LOCATION", default='Mexico')
 # This is used in links shared around the site (e.g. the footer)
@@ -163,49 +169,62 @@ WEDDING_WEBSITE_URL = env("WEDDING_WEBSITE_URL", default='wedding.com')
 DEFAULT_WEDDING_EMAIL = env("DEFAULT_WEDDING_EMAIL", default="romeaoandjuliet@email.com")
 
 # Bank account details shown on the Gifts section, one per flag/country
-# option. This placeholder version has no real data in it - put your real
-# account details in 'localsettings.py' instead (it's gitignored, so they
-# never get committed) using the same structure. 'details' is a flat list
-# of (label, value) pairs so each country can show whatever fields make
-# sense for it (IBAN/SWIFT, PIX key, CLABE, etc).
+# option. Each value is read from its own GIFT_* variable in '.env' (which is
+# gitignored, so real details never get committed); the defaults here are
+# placeholders. 'details' is a flat list of (label, value) pairs so each
+# country can show whatever fields make sense for it (IBAN/SWIFT, PIX key,
+# CLABE, etc). 'localsettings.py' can still override GIFT_ACCOUNTS entirely.
 GIFT_ACCOUNTS = [
     {
         'flag': '🇪🇺',
         'country': 'Europe',
         'details': [
-            ('Bank', 'Your bank name'),
-            ('Account holder', 'Account holder name'),
-            ('IBAN', 'XX00 0000 0000 0000 0000 00'),
+            ('Bank', env('GIFT_EU_BANK', default='Your bank name')),
+            ('Account holder', env('GIFT_EU_HOLDER', default='Account holder name')),
+            ('IBAN', env('GIFT_EU_IBAN', default='XX00 0000 0000 0000 0000 00')),
+            ('SWIFT/BIC', env('GIFT_EU_SWIFT', default='XXXXXXXX')),
         ],
     },
     {
         'flag': '🇧🇷',
         'country': 'Brazil',
         'details': [
-            ('Banco', 'Nome do banco'),
-            ('Titular', 'Nome do titular'),
-            ('Chave PIX', 'chave-pix@example.com'),
+            ('Banco', env('GIFT_BR_BANK', default='Nome do banco')),
+            ('Titular', env('GIFT_BR_HOLDER', default='Nome do titular')),
+            ('Chave PIX', env('GIFT_BR_PIX', default='chave-pix@example.com')),
         ],
     },
     {
         'flag': '🇲🇽',
         'country': 'Mexico',
         'details': [
-            ('Banco', 'Nombre del banco'),
-            ('Titular', 'Nombre del titular'),
-            ('CLABE', '000000000000000000'),
+            ('Banco', env('GIFT_MX_BANK', default='Nombre del banco')),
+            ('Titular', env('GIFT_MX_HOLDER', default='Nombre del titular')),
+            ('CLABE', env('GIFT_MX_CLABE', default='000000000000000000')),
         ],
     },
 ]
+
+# Placeholder for a future shared password guests would enter to see the
+# bank details above (not enforced yet). Set it via GIFT_PASSWORD in '.env'.
+GIFT_PASSWORD = env("GIFT_PASSWORD", default="")
 
 # Checks, if the 'localsettings.py' is present and set some couple variables
 # which are used in a few places.
 # Otherwise it will just use some defaults above will persist.
 
-try:
-    from .localsettings import *
-except ImportError:
-    pass
+
+
+# Normalise WEDDING_DATE to a full ISO 8601 string with a UTC offset, so the
+# countdown shows the same moment for guests in every timezone (a bare time
+# would be read in each visitor's local timezone). Also accepts a single-digit
+# offset hour like '-6:00', which browsers reject.
+_wedding_date = datetime.fromisoformat(
+    re.sub(r'([+-])(\d):(\d\d)$', r'\g<1>0\2:\3', WEDDING_DATE.strip())
+)
+if _wedding_date.tzinfo is None:
+    _wedding_date = _wedding_date.replace(tzinfo=ZoneInfo(WEDDING_TIMEZONE))
+WEDDING_DATE = _wedding_date.isoformat()
 
 if (MAIL_BACKEND == 'console'):
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

@@ -1,15 +1,16 @@
-<section id="contact" class="bg-dark">
+{% load static %}
+<section id="contact" class="bg-secondary">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 text-center">
+        {# Double-line "frame" whose sides fade in from the top and close at the bottom around the monogram. #}
+        <div class="contact-frame">
+            <div class="contact-frame-content text-center">
                 <h2 class="section-heading">Contact us!</h2>
-                <hr class="primary">
+                <hr>
                 <p>If you have any questions don't hesitate to reach out!</p>
+                <i class="fa fa-envelope-o fa-2x contact-icon" aria-hidden="true"></i>
+                <p><a class="contact-email" href="mailto:{{ support_email }}">{{ support_email }}</a></p>
             </div>
-            <div class="col-lg-8 col-lg-offset-2 text-center">
-                <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
-                <p><a href="mailto:{{ support_email }}">{{ support_email }}</a></p>
-            </div>
+            <img src="{% static 'bigday/images/svgs/monogram.svg' %}" alt="{{ couple_name }}" class="contact-monogram" width="96" height="96">
         </div>
     </div>
 </section>

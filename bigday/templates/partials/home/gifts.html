@@ -17,12 +17,17 @@
                     </div>
                     {% for account in gift_accounts %}
                     <div class="gift-account-details" data-account-panel="{{ forloop.counter0 }}">
-                        <h4>{{ account.flag }} {{ account.country }}</h4>
+                        <div class="gift-account-header">
+                            <h4>{{ account.flag }} {{ account.country }}</h4>
+                            <button type="button" class="gift-reveal" data-url="{% url 'gift-account' forloop.counter0 %}" aria-pressed="false" aria-label="Show bank details" title="Show bank details">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                            </button>
+                        </div>
                         <dl>
                             {% for label, value in account.details %}
                             <div class="gift-account-row">
                                 <dt>{{ label }}</dt>
-                                <dd>{{ value }}</dd>
+                                <dd class="gift-masked">••••••••</dd>
                             </div>
                             {% endfor %}
                         </dl>

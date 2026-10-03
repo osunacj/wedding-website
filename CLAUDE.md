@@ -26,12 +26,14 @@ python manage.py test              # discovers tests under guests/tests/
 docker-compose up --build          # starts Postgres + Django on port 8080
 ```
 
-The Docker entrypoint (`deploy/entrypoint.sh`) runs collectstatic, migrate, and optional superuser creation automatically.
+The Dockerfile's `CMD` runs collectstatic, migrate, and optional superuser creation automatically before starting nginx + gunicorn.
 
 Required env vars for Docker:
 
 - `SECRET_KEY` — must be changed from the default in settings.py
 - `DEBUG` — set to `False` in production
+- `ALLOWED_HOSTS` — comma-separated list of allowed hostnames (e.g. `example.com,www.example.com`)
+- `CSRF_TRUSTED_ORIGINS` — comma-separated origins with scheme (e.g. `https://example.com,https://www.example.com`); required for the RSVP form to submit over HTTPS
 - `POSTGRES_SERVER`, `POSTGRES_USER`, `POSTGRES_DB`, `POSTGRES_PASSWORD`, `POSTGRES_PORT`
 - `DJANGO_SUPERUSER_USERNAME`, `DJANGO_SUPERUSER_EMAIL`, `DJANGO_SUPERUSER_PASSWORD`
 
@@ -59,5 +61,5 @@ Use feature branches and PRs for non-trivial changes; direct commits to master i
 ## Gotchas
 
 - `Party.type` is hardcoded as `formal/fun/dimagi` — not a configurable enum.
-- The `docker-compose.yml` uses no named volumes; database data lives inside the container. Back up the database before any container teardown in production.
+- The `docker-compose.yml` persists Postgres data in the named volume `postgres-data`, which survives `docker-compose down` but is removed by `docker-compose down -v`. Back up the database before any container teardown in production.
 - The Fabric-based `fabfile.py` (`fab production deploy`) is a legacy deployment path targeting `czue.org`. Docker is the preferred path going forward.

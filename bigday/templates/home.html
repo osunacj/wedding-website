@@ -48,6 +48,98 @@
             });
         });
     </script>
+    <!-- Our Story photo carousel: crossfade every few seconds, with dots -->
+    <script>
+        $(function () {
+            var frame = $('.our-story-photo');
+            var photos = frame.find('img');
+            if (photos.length < 2) {
+                return;
+            }
+            var interval = parseInt(frame.data('carousel-interval'), 10);
+            var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var current = 0;
+            var timer = null;
+
+            var dots = $('<div class="our-story-dots"></div>').insertAfter(frame);
+            photos.each(function (i) {
+                $('<button type="button"></button>')
+                    .attr('aria-label', 'Show photo ' + (i + 1))
+                    .attr('aria-current', i === 0)
+                    .click(function () {
+                        show(i);
+                        start();
+                    })
+                    .appendTo(dots);
+            });
+
+            function show(i) {
+                photos.eq(current).removeClass('is-active');
+                dots.children().eq(current).attr('aria-current', false);
+                current = i;
+                photos.eq(current).addClass('is-active');
+                dots.children().eq(current).attr('aria-current', true);
+            }
+
+            function stop() {
+                clearInterval(timer);
+                timer = null;
+            }
+
+            function start() {
+                stop();
+                if (reduceMotion || document.hidden) {
+                    return;
+                }
+                timer = setInterval(function () {
+                    show((current + 1) % photos.length);
+                }, interval);
+            }
+
+            frame.on('mouseenter', stop).on('mouseleave', start);
+            $(document).on('visibilitychange', function () {
+                document.hidden ? stop() : start();
+            });
+            start();
+        });
+    </script>
+    <!-- Eye icon on each gift account: fetch and show/mask its details -->
+    <script>
+        $(function () {
+            var MASK = '••••••••••••••••••';
+
+            $('.gift-reveal').click(function () {
+                var button = $(this);
+                var values = button.closest('.gift-account-details').find('dd');
+                var show = button.attr('aria-pressed') !== 'true';
+
+                function render(revealed) {
+                    values.each(function (i) {
+                        $(this).text(show ? revealed[i] : MASK).toggleClass('gift-masked', !show);
+                    });
+                    var label = show ? 'Hide bank details' : 'Show bank details';
+                    button.attr({'aria-pressed': show, 'aria-label': label, title: label})
+                        .find('i').toggleClass('fa-eye', !show).toggleClass('fa-eye-slash', show);
+                }
+
+                // Values aren't in the page source; fetch them on first reveal.
+                var cached = button.data('values');
+                if (!show || cached) {
+                    render(cached);
+                    return;
+                }
+                button.prop('disabled', true);
+                $.getJSON(button.data('url'))
+                    .done(function (data) {
+                        button.data('values', data.values);
+                        render(data.values);
+                    })
+                    .always(function () {
+                        button.prop('disabled', false);
+                    });
+            });
+        });
+    </script>
     <!-- Months/days/hours/minutes countdown to the wedding -->
     <script>
         (function () {

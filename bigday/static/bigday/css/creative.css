@@ -262,7 +262,7 @@ header {
 
 #main-header {
     background-image: url('../images/posing_at_bridge.jpeg');
-    /* Same drop shadow as the Our Story photo (.our-story-photo img), so the
+    /* Same drop shadow as the Our Story photo (.our-story-photo), so the
        two photos on the page read as a matching pair. */
     box-shadow: 0 12px 24px -8px rgba(0, 0, 0, .25);
 }
@@ -388,17 +388,57 @@ header .header-content .header-content-inner p {
     text-align: left;
 }
 
+/* Our Story photo carousel: photos are stacked in a fixed-height frame and
+   crossfade by toggling .is-active (see the script in home.html). */
 .our-story-photo {
+    position: relative;
     max-width: 1000px;
+    height: 420px;
     margin: 40px auto 0;
+    box-shadow: 0 12px 24px -8px rgba(0, 0, 0, .3);
 }
 
 .our-story-photo img {
+    position: absolute;
+    inset: 0;
     display: block;
     width: 100%;
-    max-height: 320px;
+    height: 100%;
     object-fit: cover;
-    box-shadow: 0 12px 24px -8px rgba(0, 0, 0, .25);
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.our-story-photo img.is-active {
+    opacity: 1;
+}
+
+.our-story-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.our-story-dots button {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border: 1px solid #4f652c;
+    border-radius: 50%;
+    background: none;
+    cursor: pointer;
+    transition: background-color .2s;
+}
+
+.our-story-dots button[aria-current="true"] {
+    background-color: #4f652c;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .our-story-photo img {
+        transition: none;
+    }
 }
 
 @media (max-width: 767px) {
@@ -432,12 +472,12 @@ header .header-content .header-content-inner p {
    minutes until the ceremony, with a cursive tagline and mini dot
    separators between the numbers instead of a full section heading/divider. */
 #countdown {
-    padding: 25px 0;
+    padding: 50px 0 25px;
 }
 
 .countdown-intro {
     margin: 0 0 8px;
-    font-size: 20px;
+    font-size: 32px;
     color: #a85c66;
 }
 
@@ -446,8 +486,8 @@ header .header-content .header-content-inner p {
     justify-content: center;
     align-items: flex-start;
     flex-wrap: wrap;
-    gap: 4px 6px;
-    max-width: 420px;
+    gap: 4px 10px;
+    max-width: 560px;
     margin: 0 auto;
 }
 
@@ -455,12 +495,12 @@ header .header-content .header-content-inner p {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 46px;
+    min-width: 64px;
 }
 
 .countdown-value {
     font-family: 'Libre Baskerville', serif;
-    font-size: clamp(18px, 3vw, 26px);
+    font-size: clamp(26px, 5vw, 38px);
     font-weight: 700;
     line-height: 1;
     color: #4f652c;
@@ -477,7 +517,7 @@ header .header-content .header-content-inner p {
 .countdown-sep {
     align-self: center;
     margin-top: -4px;
-    font-size: clamp(22px, 2.2vw, 22px);
+    font-size: clamp(26px, 4vw, 32px);
     color: #a85c66;
     line-height: 2;
 }
@@ -687,6 +727,70 @@ header .header-content .header-content-inner p {
     color: #4f652c;
 }
 
+/* "How to book" dropdown on the official hotel card (native <details>). */
+.hotel-contact {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(58, 42, 32, .15);
+}
+
+.hotel-contact summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Libre Baskerville', serif;
+    color: #4f652c;
+    cursor: pointer;
+    list-style: none;
+}
+
+.hotel-contact summary::-webkit-details-marker {
+    display: none;
+}
+
+.hotel-contact summary .fa {
+    font-size: 12px;
+    transition: transform .2s;
+}
+
+.hotel-contact[open] summary .fa {
+    transform: rotate(180deg);
+}
+
+.hotel-contact > p {
+    margin-top: 10px;
+}
+
+.hotel-contact-price strong {
+    color: #4f652c;
+}
+
+.hotel-contact-list {
+    margin: 10px 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 15px;
+}
+
+.hotel-contact-list li + li {
+    margin-top: 6px;
+}
+
+.hotel-contact-list .fa {
+    width: 18px;
+    color: #4f652c;
+}
+
+.hotel-contact-list a {
+    color: #3a2a20;
+    word-break: break-word;
+}
+
+.hotel-contact-list a:hover,
+.hotel-contact-list a:focus {
+    color: #a85c66;
+}
+
 
 .rsvp-form {
     max-width: 640px;
@@ -743,6 +847,30 @@ header .header-content .header-content-inner p {
 /* "Option card" rows shared by the Attending and Number of Guests
    questions: each choice is its own bordered box instead of a plain
    radio, matching the reference design. */
+/* Placeholder shown in the RSVP section while the form is disabled. */
+.rsvp-coming-soon {
+    max-width: 520px;
+    margin: 30px auto 0;
+    padding: 30px 24px;
+    border: 1px solid #3a2a20;
+}
+
+.rsvp-coming-soon .fa {
+    font-size: 32px;
+    color: #4f652c;
+}
+
+.rsvp-coming-soon h3 {
+    margin: 12px 0;
+    font-family: 'Libre Baskerville', serif;
+    color: #a85c66;
+}
+
+.rsvp-coming-soon p {
+    margin: 0;
+    color: #3a2a20;
+}
+
 .rsvp-options {
     display: flex;
     flex-wrap: wrap;
@@ -811,8 +939,35 @@ header .header-content .header-content-inner p {
     display: block;
 }
 
+.gift-account-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.gift-reveal {
+    padding: 4px 8px;
+    border: none;
+    background: none;
+    font-size: 20px;
+    color: #4f652c;
+    cursor: pointer;
+}
+
+.gift-reveal:hover,
+.gift-reveal:focus {
+    color: #3d4f22;
+}
+
+.gift-account-row dd.gift-masked {
+    letter-spacing: 2px;
+    color: rgba(58, 42, 32, .5);
+}
+
 .gift-account-details h4 {
-    margin-top: 0;
+    margin: 0;
     font-family: 'Libre Baskerville', serif;
     color: #a0af6c;
 }
@@ -874,7 +1029,89 @@ header .header-content .header-content-inner p {
     background-color: #3d4f22;
 }
 
+/* Contact: the closing section of the page, drawn as the bottom of a thin
+   green double-line frame (sides fade in from the top) with the couple's
+   monogram breaking the bottom line. The footer below continues the same
+   cream background. */
+#contact {
+    padding-bottom: 0;
+}
+
+.contact-frame {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    /* Room below the frame for the half of the monogram that hangs out. */
+    padding-bottom: 48px;
+}
+
+.contact-frame::before,
+.contact-frame::after {
+    content: '';
+    position: absolute;
+    border: 1px solid #4f652c;
+    border-top: none;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 140px);
+    mask-image: linear-gradient(to bottom, transparent, #000 140px);
+}
+
+/* Outer line */
+.contact-frame::before {
+    top: 0;
+    right: 0;
+    bottom: 48px;
+    left: 0;
+}
+
+/* Inner line */
+.contact-frame::after {
+    top: 0;
+    right: 6px;
+    bottom: 54px;
+    left: 6px;
+}
+
+.contact-frame-content {
+    padding: 20px 30px 70px;
+}
+
+.contact-icon {
+    margin-top: 10px;
+    color: #4f652c;
+}
+
+.contact-email {
+    color: #4f652c;
+}
+
+.contact-email:hover,
+.contact-email:focus {
+    color: #a85c66;
+}
+
+/* Sits centred on the frame's bottom lines, with a cream backing so the
+   lines appear to stop on either side of it. */
+.contact-monogram {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    z-index: 1;
+    width: 96px;
+    height: 96px;
+    padding: 0 14px;
+    box-sizing: content-box;
+    background-color: #f0f0e4;
+    transform: translateX(-50%);
+}
+
 #footer {
-    background-color: #222;
-    padding-bottom: 30px;
+    padding: 20px 15px 30px;
+    background-color: #f0f0e4;
+    color: #3a2a20;
+    font-size: 13px;
+}
+
+#footer a {
+    color: #4f652c;
 }

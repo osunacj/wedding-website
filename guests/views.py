@@ -2,8 +2,9 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.db.models import Count, Q
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import Http404, HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render
+from django.views.decorators.cache import never_cache
 from django.views.generic import ListView
 from guests import csv_import
 from guests.forms import RSVPForm
@@ -32,6 +33,19 @@ def home(request):
         'gift_accounts': settings.GIFT_ACCOUNTS,
     })
 
+
+
+@never_cache
+def gift_account(request, index):
+    # Bank details are kept out of the homepage HTML (which only shows masked
+    # placeholders) and fetched per account when a visitor clicks the eye icon.
+    try:
+        account = settings.GIFT_ACCOUNTS[index]
+    except IndexError:
+        raise Http404
+    response = JsonResponse({'values': [value for label, value in account['details']]})
+    response['X-Robots-Tag'] = 'noindex, nofollow'
+    return response
 
 class GuestListView(ListView):
     model = Guest
