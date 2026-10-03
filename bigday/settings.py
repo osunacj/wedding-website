@@ -160,7 +160,7 @@ BRIDE_AND_GROOM = env("BRIDE_AND_GROOM", default='Romeo and Juliet')
 # WEDDING_TIMEZONE, or include one (e.g. '2027-05-29T16:00:00-06:00').
 WEDDING_DATE = env("WEDDING_DATE", default='2027-05-29T16:00:00')
 # IANA timezone name of the wedding venue, used when WEDDING_DATE has no offset
-WEDDING_TIMEZONE = env("WEDDING_TIMEZONE", default='Mexico_City')
+WEDDING_TIMEZONE = env("WEDDING_TIMEZONE", default='America/Mexico_City')
 # the location of your wedding
 WEDDING_LOCATION = env("WEDDING_LOCATION", default='Mexico')
 # This is used in links shared around the site (e.g. the footer)
