@@ -1,0 +1,8 @@
+# Keep local/dev-only files out of the Docker image
+.git
+.env
+.venv
+**/__pycache__
+*.pyc
+static_root
+build_and_push.sh
